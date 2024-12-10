@@ -21,7 +21,7 @@ public class StudentParentService:IStudentParentService
     public bool AddStudentParent(StudentParent studentParent)
     {
         try{
-        var insert="insert into StudentParents (StudentParent_title,level_count,is_active,created_at,updated_at) values(@StudentParent_title,@Level_count,@Is_active,@Created_at,@Updated_at)";
+        var insert="insert into StudentParents (studentParentId,studentId,parentId) values(@StudentParentId_,@StudentID,@ParentId)";
         var res=context.Connection().Execute(insert,studentParent)
         return res>0;
         }
@@ -57,11 +57,8 @@ public class StudentParentService:IStudentParentService
          foreach(StudentParent c in StudentParents)
          {
             System.Console.WriteLine($@"""
-            Title = {c.StudentParent_title}
-            Level_count = {c.Level_count}
-            Is_active = {c.Is_active}
-            Created_at = {c.Created_at}
-            Updated_at = {c.Updated_at}
+            StudentId = {c.StudentID}
+            ParentId = {c.ParentID}
             """);
          }
         }
@@ -74,7 +71,7 @@ public class StudentParentService:IStudentParentService
     public bool UpdateStudentParent(StudentParent studentParent)
     {
         try{
-          string updateComand=$"Update StudentParents set StudentParentId=@StudentParentId StudentParent_title=@StudentParent_title, level_count=@Level_count,is_active=@Is_active, Created_at=@Created_at, Updated_at=@Updated_at";
+          string updateComand=$"Update StudentParents set StudentParentId=@StudentParentId studentId=@StudentId, parentId=@ParentId";
           var res=context.Connection().Execute(updateComand,studentParent);
           return res>0;
         }
